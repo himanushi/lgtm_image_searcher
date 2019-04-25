@@ -1,0 +1,29 @@
+<p><script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script><br><script src="https://cdn.jsdelivr.net/clipboard.js/1.5.3/clipboard.min.js"></script><br>GIPHY APIを使用してGifを検索してコピペできるツール</p>
+<img src="https://himakan.net/wp-content/uploads/2019/04/PoweredBy_200_Horizontal_Light-Backgrounds_With_Logo.gif">
+<h4>トレンド検索</h4>
+<p>トレンド検索を有効にする：<input id="trending" type="checkbox"><br>※トレンド検索を有効にすると検索ワードは無視されます。</p>
+<h4>検索ワード(例：cute+cat)</h4>
+<p>anime: simpsons,jojos+bizarre+adventure,nichijou<br><textarea id="word">cat</textarea></p>
+<h4>検索数(最大100まで)</h4>
+<p><textarea id="limit">10</textarea><br><button id="btn">Search!!</button><br>画像をクリックするだけでコピペがされます。<br>例：`![LGTM](https://media4.giphy.com/media/W80Y9y1XwiL84/giphy.gif)`のようにすぐ使えます。</p>
+<div id="lgtm_images">&nbsp;</div>
+<p><button id="more_btn">もっと表示する</button></p>
+<h3>あとがき</h3>
+<ul>
+    <li>v 1.0 ソースコードは<a href="http://himakan.net/web/js/lgtm_search_copy_code"><strong>こちら</strong></a>
+        <ul>
+            <li>検索できるだけ</li>
+        </ul>
+    </li>
+    <li>v 1.1 ソースコードは<a href="http://himakan.net/web/js/lgtm_search_copy_code2"><strong>こちら</strong></a>
+        <ul>
+            <li>もっと検索ボタン追加</li>
+        </ul>
+    </li>
+    <li>v 1.2 ソースコードは<a href="http://himakan.net/web/js/lgtm_search_copy_code3"><strong>こちら</strong></a>
+        <ul>
+            <li>トレンド検索追加、多分最後の機能追加かな</li>
+        </ul>
+    </li>
+</ul>
+<script type="text/javascript">var lgiftm={};!function(){"use strict";var i="https://api.giphy.com/v1/gifs/",t="n7M1sLNbUj0CCTbYCCqkLNJZFp9xrKIb",e=0;lgiftm.setMoreGiphySearchImage=function(){this.setGiphySearchImage($("#word").val(),$("#limit").val()+"&offset="+e)},lgiftm.setGiphySearchImage=function(a,c){var l="";l=$("#trending").prop("checked")?i+"trending?&api_key="+t+"&limit="+c:i+"search?q="+a+"&api_key="+t+"&limit="+c,$.getJSON(l,function(i){var t=0;$.each(i.data,function(i,e){$("#lgtm_images").append('<img class="copy" data-clipboard-text="![LGTM]('+e.images.original.url+')" id="lgtm'+t+'" src="'+e.images.fixed_width_small.url+'">'),t++}),new Clipboard(".copy")}),e+=parseInt($("#limit").val())},lgiftm.clear=function(){$("div#lgtm_images").empty(),e=0}}(),function(){"use strict";lgiftm.setGiphySearchImage("cat",10),$("#btn").click(function(i){lgiftm.clear(),lgiftm.setGiphySearchImage($("#word").val(),$("#limit").val())}),$("#more_btn").click(function(i){lgiftm.setMoreGiphySearchImage()})}();</script>
