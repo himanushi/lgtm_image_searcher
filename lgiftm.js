@@ -17,9 +17,11 @@ var lgiftm = {};
 
         offsetUrl = "&offset=",
 
-        imgTag1 = '<img class="copy" data-clipboard-text="![LGTM](',
+        imgTag1 = '<img class="copy" data-clipboard-text="[![LGTM](',
 
-        imgTag2 = ')" id="lgtm',
+        imgTag2 = ')](',
+
+        imgTag2_2 =  ')" id="lgtm',
 
         imgTag3 = '" src="',
 
@@ -57,8 +59,9 @@ var lgiftm = {};
                 var i = 0;
                 $.each(data.data, function( key, val ) {
                     $( lgtmId ).append(
-                        imgTag1 + val.images.original.url +
-                        imgTag2 + i + imgTag3 +
+                        imgTag1 + val.images.fixed_width.url +
+                        imgTag2 + val.images.fixed_width.url +
+                        imgTag2_2 + i + imgTag3 +
                         val.images.fixed_width_small.url + imgTag4
                     );
                     i++;
